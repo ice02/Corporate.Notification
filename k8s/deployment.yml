@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: corporate-chat
+spec:
+  selector:
+    matchLabels:
+      app: corporate-chat
+  replicas: 2 
+  template: 
+    metadata:
+      labels:
+        app: corporate-chat
+    spec:
+      containers:
+      - name: corporate-chat
+        image: chat-webapp:3.3
+        imagePullPolicy: Never
+        env:
+        - name: ASPNETCORE_HOSTNAME
+          value: K8S
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 250m
+          limits:
+            memory: 128Mi
+            cpu: 500m    
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: corporate-chat
+spec:
+ ports:
+  - port: 80
+    protocol: TCP
+    targetPort: corporate-chat-port
+ selector:
+   app: corporate-chat
+ type: LoadBalancer
