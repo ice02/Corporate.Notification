@@ -4,8 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Corporate.Chat.API.Context
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MessageConfig : IEntityTypeConfiguration<Message>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         public void Configure(EntityTypeBuilder<Message> modelBuilder)
         {
             modelBuilder.ToTable("MESSAGE");

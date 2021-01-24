@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Corporate.Chat.Console.Client
 {
-	
-/// <summary>
-	/// 
+
+	/// <summary>
+	///  Message Contract
 	/// </summary>
 	public class Message
 	{
@@ -34,6 +34,21 @@ namespace Corporate.Chat.Console.Client
 		/// 
 		/// </summary>
 		public string Text { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string CircleImageUri { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string ImageUri { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool WithTextFeedback { get; set; }
 
 		/// <summary>
 		/// 

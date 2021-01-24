@@ -47,11 +47,16 @@ namespace Corporate.Chat.API.Hubs
                 notificationContext.Messages.Add(message);
                 notificationContext.SaveChangesAsync();
             }
+
+            var grp = Clients.Group($"usr-{message.Name}");
+
             return Clients.Group($"usr-{user}").SendAsync("ReceiveMessage", message);
         }
 
         public override Task OnConnectedAsync()
         {
+            
+
             return base.OnConnectedAsync();
         }
 
@@ -99,7 +104,23 @@ namespace Corporate.Chat.API.Hubs
                 logger.LogError(ex, ex.Message);
             }
         }
-        
+
+        //public void Register(string clientName)
+        //{
+        //    try
+        //    {
+        //        Groups.AddToGroupAsync(Context.ConnectionId, clientName);
+        //        ConnectionManager.RegisterOrUpdateClient(Context.ConnectionId, clientName);
+        //        Clients.Group(clientName).SendAsync("RegistrationSuccess", $"{clientName} registered with Hub.");
+        //        _log.Info($"RegistrationSuccess at {DateTime.UtcNow}, {clientName} registered with Hub.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Clients.Group(clientName).SendAsync("Error", ex.Message);
+        //        _log.Error(ex, $"Register Failed at {DateTime.UtcNow} for client {clientName}");
+        //    }
+        //}
+
         public override async Task OnDisconnectedAsync(System.Exception exception)
         {
             logger.LogWarning($@"User ConnectionId: {Context.ConnectionId}  Name: {Context.User?.Identity?.Name} Identifier: {Context.UserIdentifier} disconnected.");

@@ -35,6 +35,21 @@ namespace Corporate.Chat.API.Model
 		/// <summary>
 		/// 
 		/// </summary>
+		public string CircleImageUri { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string ImageUri { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool WithTextFeedback { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public DateTime CreatedDate { get; set; }
 
 	}

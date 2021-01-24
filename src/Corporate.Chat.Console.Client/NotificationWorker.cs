@@ -87,6 +87,7 @@ namespace Corporate.Chat.Console.Client
 
             logger.LogInformation("Type your name:");
 
+            // TODO : get windows authenticated user
             name = System.Console.ReadLine();
 
             await SetupSignalRHubAsync();
@@ -97,10 +98,17 @@ namespace Corporate.Chat.Console.Client
                 // Obtain the arguments from the notification
                 ToastArguments args = ToastArguments.Parse(toastArgs.Argument);
 
-                // Obtain any user input (text boxes, menu selections) from the notification
-                ValueSet userInput = toastArgs.UserInput;
-
-                logger.LogInformation($"Received response from user : {userInput["tbReply"]}");
+                if (args.Contains("action"))
+                {
+                    switch(args["action"])
+                    {
+                        case "Send":
+                            // Obtain any user input (text boxes, menu selections) from the notification
+                            ValueSet userInput = toastArgs.UserInput;
+                            logger.LogInformation($"Received response from user : {userInput["tbReply"]}");
+                            break;
+                    }
+                }
             };
 
             do
@@ -178,8 +186,24 @@ namespace Corporate.Chat.Console.Client
                 {
                     logger.LogInformation($"Received Message -> {message.Name} said: {message.Text}");
 
+                    var appLogoImage = new Uri(DownloadImageToDisk("https://unsplash.it/64?image=1005"));
+                    var inlineImage = new Uri(DownloadImageToDisk("https://picsum.photos/364/202?image=883"));
+
+                    // TODO : validate link ok
+                    if (!string.IsNullOrEmpty(message.CircleImageUri))
+                    {
+                        appLogoImage = new Uri(DownloadImageToDisk(message.CircleImageUri));
+                    }
+
+                    // TODO : validate link ok
+                    if (!string.IsNullOrEmpty(message.ImageUri))
+                    {
+                        inlineImage = new Uri(DownloadImageToDisk(message.ImageUri));
+                    }
+
                     // show notification in windows notif center
-                    new ToastContentBuilder()
+                    var toast = new ToastContentBuilder()
+                        //.SetProtocolActivation("http://mydigitalworkplace.com")
 
                         .AddArgument("action", "viewConversation")
                         .AddArgument("conversationId", 9813)
@@ -191,27 +215,34 @@ namespace Corporate.Chat.Console.Client
 
                         .AddAttributionText("Atribution text")
 
-                        .AddHeroImage(new Uri(DownloadImageToDisk("https://picsum.photos/364/202?image=883")))
+                        //.AddHeroImage(new Uri(DownloadImageToDisk("https://picsum.photos/364/202?image=883")))
 
-                        //.AddInlineImage(new Uri(DownloadImageToDisk("https://picsum.photos/364/202?image=883")))
-                        .AddAppLogoOverride(new Uri(DownloadImageToDisk("https://unsplash.it/64?image=1005")), ToastGenericAppLogoCrop.Circle)
-                        
+                        .AddInlineImage(inlineImage)
+                        .AddAppLogoOverride(appLogoImage, ToastGenericAppLogoCrop.Circle)
 
-                        // Text box for typing a reply
-                        .AddInputTextBox("tbReply", "Type a reply")
+                        .SetToastScenario(ToastScenario.Reminder);
 
-                        .AddButton(new ToastButton()
-                            .SetContent("Send")
-                            //.SetImageUri(new Uri("Assets/NotifIcon.png", UriKind.Relative))
-                            .SetTextBoxId("tbReply") // Reference text box ID to place this next to the text box
-                            .AddArgument("action", "Send")
-                            .SetBackgroundActivation())
-                        .AddButton(new ToastButton()
-                            .SetContent("No thanks")
-                            .SetBackgroundActivation())
-                        //.AddAppLogoOverride(new Uri("Assets/NotifIcon.jpg", UriKind.Relative), ToastGenericAppLogoCrop.Circle)
-                        .SetToastScenario(ToastScenario.Reminder)
-                    .Show();
+                    if (message.WithTextFeedback)
+                    {
+                        toast.AddInputTextBox("tbReply", "Type a reply")
+                               .AddButton(new ToastButton()
+                                    .SetContent("Send")
+                                    //.SetImageUri(new Uri("Assets/NotifIcon.png", UriKind.Relative))
+                                    .SetTextBoxId("tbReply") // Reference text box ID to place this next to the text box
+                                    .AddArgument("action", "Send")
+                                    .SetBackgroundActivation())
+                                .AddButton(new ToastButton()
+                                    .SetContent("No thanks")
+                                    .SetBackgroundActivation());
+                    }
+                    else
+                    {
+                        toast.AddButton(new ToastButton()
+                                    .SetContent("Ok")
+                                    .SetBackgroundActivation());
+                    }
+
+                    toast.Show();
                 }
             });
 
@@ -225,6 +256,8 @@ namespace Corporate.Chat.Console.Client
                 logger.LogInformation($"{message.Text}");
             });
         }
+
+        
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {

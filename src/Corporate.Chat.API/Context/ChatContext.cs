@@ -9,15 +9,26 @@ using Microsoft.Extensions.Configuration;
 
 namespace Corporate.Chat.API.Context
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class ChatContext : DbContext
 	{
 		private readonly IWebHostEnvironment _env;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="env"></param>
 		public ChatContext(IWebHostEnvironment env)
 		{
 			_env = env;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="optionsBuilder"></param>
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			// get the configuration from the app settings
@@ -32,6 +43,10 @@ namespace Corporate.Chat.API.Context
 			optionsBuilder.UseInMemoryDatabase("Chat");
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="modelBuilder"></param>
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new UserChatConfig());
@@ -39,7 +54,13 @@ namespace Corporate.Chat.API.Context
 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public DbSet<UserChat> UsersChat { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
 		public DbSet<Message> Messages { get; set; }
 	}
 }

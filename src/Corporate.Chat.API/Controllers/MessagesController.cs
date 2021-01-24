@@ -54,11 +54,11 @@ namespace Corporate.Chat.API.Controllers
         [HttpPost]
         //[Authorize()]
         [SwaggerResponse((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Post(string toUser, string fromUser, string message)
+        public async Task<IActionResult> Post(string toUser, string fromUser, [FromBody] Message message)
         {
-            if (!string.IsNullOrEmpty(message) && !string.IsNullOrEmpty(toUser) && !string.IsNullOrEmpty(fromUser))
+            if (message != null && !string.IsNullOrEmpty(toUser) && !string.IsNullOrEmpty(fromUser))
             {
-                await _hubConnection.SendAsync("SendToUser", new Message { Name = fromUser, Text = message }, toUser);
+                await _hubConnection.SendAsync("SendToUser", message, toUser);
                 //await _hubConnection.SendAsync("Send", new Message { Name = name, Text = message });
                 //logger.LogInformation("SendAsync to Hub");
             }

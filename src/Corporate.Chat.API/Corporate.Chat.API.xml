@@ -1,9 +1,78 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Corporate.Chat.API</name>
+        <name>Notification.Engine</name>
     </assembly>
     <members>
+        <member name="T:Corporate.Chat.API.Context.ChatContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Corporate.Chat.API.Context.ChatContext.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="env"></param>
+        </member>
+        <member name="M:Corporate.Chat.API.Context.ChatContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="optionsBuilder"></param>
+        </member>
+        <member name="M:Corporate.Chat.API.Context.ChatContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="P:Corporate.Chat.API.Context.ChatContext.UsersChat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Corporate.Chat.API.Context.ChatContext.Messages">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Corporate.Chat.API.Context.MessageConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Corporate.Chat.API.Context.MessageConfig.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Corporate.Chat.API.Model.Message})">
+            <summary>
+            
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:Corporate.Chat.API.Controllers.UsersController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Corporate.Chat.API.Controllers.UsersController.#ctor(Corporate.Chat.API.Context.ChatContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Corporate.Chat.API.Controllers.UsersController.GetAll">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Corporate.Chat.API.Controllers.UsersController.GetPaged(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
         <member name="T:Corporate.Chat.API.Model.Message">
             <summary>
              Message Contract
@@ -34,7 +103,74 @@
             
             </summary>
         </member>
+        <member name="P:Corporate.Chat.API.Model.Message.CircleImageUri">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Corporate.Chat.API.Model.Message.ImageUri">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Corporate.Chat.API.Model.Message.WithTextFeedback">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Corporate.Chat.API.Model.Message.CreatedDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Corporate.Chat.API.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Corporate.Chat.API.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Corporate.Chat.API.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Corporate.Chat.API.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Corporate.Chat.API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:Corporate.Chat.API.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Corporate.Chat.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Corporate.Chat.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+        <member name="T:Notification.Engine.Controllers.AdminController">
             <summary>
             
             </summary>
