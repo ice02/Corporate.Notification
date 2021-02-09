@@ -1,0 +1,288 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Notification.Engine</name>
+    </assembly>
+    <members>
+        <member name="T:Notification.Engine.Controllers.AdminController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Notification.Engine.Controllers.MessageHubController`1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Notification.Engine.Controllers.MessageHubController`1.Hub">
+            <summary>
+            SignalR hub context.
+            </summary>
+        </member>
+        <member name="M:Notification.Engine.Controllers.MessageHubController`1.#ctor(Microsoft.AspNetCore.SignalR.IHubContext{`0})">
+            <summary>
+            
+            </summary>
+            <param name="hub"></param>
+        </member>
+        <member name="M:Notification.Engine.Controllers.MessageHubController`1.Post(Notification.Data.Model.MessageToSend)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Notification.Engine.Controllers.MessagesController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Notification.Engine.Controllers.MessagesController.Hub">
+            <summary>
+            SignalR hub context.
+            </summary>
+        </member>
+        <member name="M:Notification.Engine.Controllers.MessagesController.#ctor(Notification.Data.Context.NotificationContext,Microsoft.AspNetCore.SignalR.IHubContext{Notification.Engine.Hubs.NotificationHub})">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Notification.Engine.Controllers.MessagesController.GetAll">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Notification.Engine.Controllers.MessagesController.GetPaged(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Notification.Engine.Controllers.MessagesController.Post(Notification.Data.Model.MessageToSend)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Notification.Engine.Controllers.UsersController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Notification.Engine.Controllers.UsersController.#ctor(Notification.Data.Context.NotificationContext,Notification.Data.Model.IClientList)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <param name="ClientLists"></param>
+        </member>
+        <member name="M:Notification.Engine.Controllers.UsersController.GetByName(System.String)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Notification.Engine.Controllers.UsersController.GetClients">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Notification.Engine.Controllers.UsersController.GetPaged(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Notification.Engine.PagedHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Notification.Engine.PagedHelper.GetPagedAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Notification.Engine.PagedResultBase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Notification.Engine.PagedResultBase.CurrentPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Notification.Engine.PagedResultBase.PageCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Notification.Engine.PagedResultBase.PageSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Notification.Engine.PagedResultBase.RowCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Notification.Engine.PagedResultBase.FirstRowOnPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Notification.Engine.PagedResultBase.LastRowOnPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Notification.Engine.PagedResult`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Notification.Engine.PagedResult`1.Results">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Notification.Engine.PagedResult`1.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Notification.Engine.Hubs.NotificationHub">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Notification.Engine.Hubs.NotificationHub.#ctor(Notification.Data.Context.NotificationContext,Microsoft.Extensions.Logging.ILogger{Notification.Engine.Hubs.NotificationHub},Notification.Data.Model.IClientList)">
+            <summary>
+            
+            </summary>
+            <param name="notificationContext"></param>
+            <param name="logger"></param>
+            <param name="list"></param>
+        </member>
+        <member name="M:Notification.Engine.Hubs.NotificationHub.SendtoUser(Notification.Data.Model.Message,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Notification.Engine.Hubs.NotificationHub.OnConnectedAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Notification.Engine.Hubs.NotificationHub.Register(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Register metadata for a user (country, language, ...)
+            </summary>
+            <param name="tags"></param>
+        </member>
+        <member name="M:Notification.Engine.Hubs.NotificationHub.OnDisconnectedAsync(System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Notification.Engine.Hubs.NotificationHub.Heartbeat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Notification.Engine.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Notification.Engine.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Notification.Engine.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Notification.Engine.Providers.NameUserIdProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Notification.Engine.Providers.NameUserIdProvider.GetUserId(Microsoft.AspNetCore.SignalR.HubConnectionContext)">
+            <summary>
+            
+            </summary>
+            <param name="connection"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Notification.Engine.Providers.ValidateAuthentication">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Notification.Engine.Providers.ValidateAuthentication.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Notification.Engine.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Notification.Engine.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:Notification.Engine.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Notification.Engine.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Notification.Engine.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>

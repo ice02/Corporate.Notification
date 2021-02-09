@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Notification.Data.Model
 {
@@ -15,17 +17,7 @@ namespace Notification.Data.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int UserChatId { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public int EventId { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public string Name { get; set; }
+		public string Title { get; set; }
 
 		/// <summary>
 		/// 
@@ -51,6 +43,12 @@ namespace Notification.Data.Model
 		/// 
 		/// </summary>
 		public DateTime CreatedDate { get; set; }
+
+		public virtual ICollection<NotificationUser> Users {get; set;}
+
+		public int CampaignId { get; set; }
+		public Campaign Campaign { get; set; }
+
 
 	}
 }

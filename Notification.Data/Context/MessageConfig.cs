@@ -20,8 +20,8 @@ namespace Notification.Data.Context
                 .IsRequired();
 
             modelBuilder
-                .Property(s => s.Name)
-                .HasColumnName("NAME")
+                .Property(s => s.Title)
+                .HasColumnName("TITLE")
                 .HasMaxLength(120)
                 .HasColumnType("varchar(120)")
                 .IsRequired();
@@ -35,10 +35,15 @@ namespace Notification.Data.Context
 
             modelBuilder
                 .Property(s => s.CreatedDate)
-                .HasColumnType("DateTime")
+                .HasColumnType("timestamp")
                 .HasColumnName("CREATED_DATE")
-                .HasDefaultValueSql("GetDate()")
+                .HasDefaultValueSql("clock_timestamp()")
                 .IsRequired();
+
+            modelBuilder
+                .HasOne(b => b.Campaign)
+                .WithOne(i => i.Message)
+                .HasForeignKey<Campaign>(b => b.MessageId);
 
         }
 

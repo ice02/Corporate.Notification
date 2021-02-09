@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Notification.Data.Context;
+using Notification.Data.Dto;
 using Notification.Data.Model;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -16,10 +17,10 @@ namespace Notification.Brain.Controllers
     [ApiController]
     public class MessagesController : ControllerBase
     {
-        private readonly ChatContext context;
+        private readonly NotificationContext context;
         private HubConnection _hubConnection;
 
-        public MessagesController(ChatContext context)
+        public MessagesController(NotificationContext context)
         {
             this.context = context;
 
@@ -54,10 +55,12 @@ namespace Notification.Brain.Controllers
         [HttpPost]
         //[Authorize()]
         [SwaggerResponse((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Post(string toUser, string fromUser, [FromBody] Message message)
+        public async Task<IActionResult> Post(string toUser, string fromUser, [FromBody] MessageDto message)
         {
             if (message != null && !string.IsNullOrEmpty(toUser) && !string.IsNullOrEmpty(fromUser))
             {
+                // TODO : translate DTO Message into SigRMessage
+                
                 await _hubConnection.SendAsync("SendToUser", message, toUser);
                 //await _hubConnection.SendAsync("Send", new Message { Name = name, Text = message });
                 //logger.LogInformation("SendAsync to Hub");

@@ -16,13 +16,13 @@ namespace Notification.Brain.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly ChatContext context;
+        private readonly NotificationContext context;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="context"></param>
-        public UsersController(ChatContext context)
+        public UsersController(NotificationContext context)
         {
             this.context = context;
         }
@@ -33,7 +33,7 @@ namespace Notification.Brain.Controllers
         /// <returns></returns>
         // GET api/users
         [HttpGet("All")]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IEnumerable<UserChat>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IEnumerable<NotificationUser>))]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await context.UsersChat.AsNoTracking().ToListAsync());
@@ -47,7 +47,7 @@ namespace Notification.Brain.Controllers
         /// <returns></returns>
         // GET api/users?page={0}&pageSize={1}
         [HttpGet]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(PagedResult<UserChat>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(PagedResult<NotificationUser>))]
         public async Task<IActionResult> GetPaged([FromQuery] int page, int pageSize)
         {
             return Ok(await context.UsersChat.AsNoTracking().GetPagedAsync(page, pageSize));

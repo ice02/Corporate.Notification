@@ -271,3 +271,4 @@ node_modules/
 package-lock.json
 
 healthchecksdb
+/db-data

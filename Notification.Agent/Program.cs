@@ -1,11 +1,10 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Notification.Display.Configuration;
+using Notification.Display.Library;
 
-namespace Notification.Agent
+namespace Notification.Display
 {
     public class Program
     {
@@ -16,9 +15,18 @@ namespace Notification.Agent
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
+                .ConfigureLogging(logging =>
                 {
-                    services.AddHostedService<Worker>();
-                });
+                    //TODO: Add logging
+                    //logging.AddConsole();
+                })
+            .ConfigureServices((hostContext, services) =>
+            {
+                services.AddOptions();
+                services.AddLogging();
+                services.AddHostedService<NotificationWorker>();
+            })
+            .UseWindowsService(option => { option.ServiceName = "MDWNotifier"; })
+            ;
     }
 }
